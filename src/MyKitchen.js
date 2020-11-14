@@ -30,7 +30,7 @@ const MyKitchen = () => {
     <>
       {recipes.length > 0 && (
         <Recipes
-          title="Prepare your dish:"
+          title="Prepare your dish"
           dishes={recipes}
           dishIsReady={false}
           onDishClicked={handleDishClick}
@@ -38,7 +38,7 @@ const MyKitchen = () => {
       )}
       {readMeals.length > 0 && (
         <Recipes
-          title="Ready to eat:"
+          title="Ready to eat"
           dishes={readMeals}
           dishIsReady={true}
           onDishClicked={handleDishClick}

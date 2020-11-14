@@ -5,7 +5,9 @@ import { CardColumns } from 'react-bootstrap';
 const Recipes = ({ title, dishes, dishIsReady, onDishClicked }) => {
   return (
     <>
-      <h4>{title}</h4>
+      <h4>
+        {title}: {dishes.length}
+      </h4>
       <CardColumns>
         {dishes.map(dish => (
           <Recipe
