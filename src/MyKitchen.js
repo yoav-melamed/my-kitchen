@@ -3,30 +3,44 @@ import { dishesStore } from './dishesStore';
 import Recipes from './Recipes';
 
 const MyKitchen = () => {
-  const [dishes, setDishes] = useState(dishesStore);
+  const [recipes, setRecipes] = useState(dishesStore);
+  const [readMeals, setReadyMeals] = useState([]);
 
-  const prepareDishes = dishes.filter(d => d.ready === 0);
-  const readyDishes = dishes.filter(d => d.ready === 1);
+  const handleDishClick = dish => {
+    // if the clicked dish is currently exists in the recipes array
+    if (recipes.includes(dish)) {
+      // add it to the readMeals array
+      setReadyMeals([...readMeals, dish]);
 
-  const handleDishClick = dishId => {
-    let dish = dishes.find(d => d.id === dishId);
-    dish.ready = dish.ready > 0 ? (dish.ready -= 1) : (dish.ready += 1);
-    setDishes(prevState => prevState.map(d => (d.id === dishId ? dish : d)));
+      // remove it from the recipes array
+      setRecipes(prevState => prevState.filter(d => d.id !== dish.id));
+    }
+
+    // if the clicked dish is ready
+    else {
+      // add it to the recipes array
+      setRecipes([...recipes, dish]);
+
+      // remove it from the recipes array
+      setReadyMeals(prevState => prevState.filter(d => d.id !== dish.id));
+    }
   };
 
   return (
     <>
-      {prepareDishes.length > 0 && (
+      {recipes.length > 0 && (
         <Recipes
           title="Prepare your dish:"
-          dishes={prepareDishes}
+          dishes={recipes}
+          dishIsReady={false}
           onDishClicked={handleDishClick}
         />
       )}
-      {readyDishes.length > 0 && (
+      {readMeals.length > 0 && (
         <Recipes
           title="Ready to eat:"
-          dishes={readyDishes}
+          dishes={readMeals}
+          dishIsReady={true}
           onDishClicked={handleDishClick}
         />
       )}

@@ -2,7 +2,7 @@ import Recipe from './Recipe';
 import PropTypes from 'prop-types';
 import { CardColumns } from 'react-bootstrap';
 
-const Recipes = ({ title, dishes, onDishClicked }) => {
+const Recipes = ({ title, dishes, dishIsReady, onDishClicked }) => {
   return (
     <>
       <h4>{title}</h4>
@@ -10,11 +10,8 @@ const Recipes = ({ title, dishes, onDishClicked }) => {
         {dishes.map(dish => (
           <Recipe
             key={dish.id}
-            dishId={dish.id}
-            dishName={dish.name}
-            dishDesc={dish.desc}
-            dishImage={dish.image}
-            dishReady={dish.ready}
+            dish={dish}
+            dishIsReady={dishIsReady}
             onDishClicked={onDishClicked}
           />
         ))}
@@ -24,7 +21,9 @@ const Recipes = ({ title, dishes, onDishClicked }) => {
 };
 
 Recipes.propTypes = {
+  title: PropTypes.string.isRequired,
   dishes: PropTypes.array.isRequired,
+  dishIsReady: PropTypes.bool.isRequired,
   onDishClicked: PropTypes.func.isRequired,
 };
 

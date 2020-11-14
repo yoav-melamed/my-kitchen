@@ -1,32 +1,22 @@
 import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
 
-const Recipe = ({
-  dishId,
-  dishName,
-  dishDesc,
-  dishImage,
-  dishReady,
-  onDishClicked,
-}) => (
+const Recipe = ({ dish, dishIsReady, onDishClicked }) => (
   <Card style={{ width: '18rem' }}>
-    <Card.Img variant="top" src={dishImage} />
+    <Card.Img variant="top" src={dish.image} />
     <Card.Body>
-      <Card.Title>{dishName}</Card.Title>
-      <Card.Text>{dishDesc}</Card.Text>
-      <Button variant="primary" onClick={() => onDishClicked(dishId)}>
-        {dishReady ? 'EAT!' : 'Prepare dish'}
+      <Card.Title>{dish.name}</Card.Title>
+      <Card.Text>{dish.desc}</Card.Text>
+      <Button variant="primary" onClick={() => onDishClicked(dish)}>
+        {dishIsReady ? 'EAT!' : 'Prepare dish'}
       </Button>
     </Card.Body>
   </Card>
 );
 
 Recipe.propTypes = {
-  dishId: PropTypes.number.isRequired,
-  dishName: PropTypes.string.isRequired,
-  dishDesc: PropTypes.string,
-  dishImage: PropTypes.string.isRequired,
-  dishReady: PropTypes.number.isRequired,
+  dish: PropTypes.object.isRequired,
+  dishIsReady: PropTypes.bool.isRequired,
   onDishClicked: PropTypes.func.isRequired,
 };
 
